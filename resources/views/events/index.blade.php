@@ -36,11 +36,6 @@
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $event->name}}
-                  </div>
-                </td>
-                <td class="table-text">
-                  <div>
                     {{ $event->created_at}}
                   </div>
                 </td>

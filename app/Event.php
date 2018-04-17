@@ -15,7 +15,7 @@ class Event extends Model
    * @var array
    */
   protected $fillable = [
-      'duration', 'description', 'event_date','event_time','image_path','club_id',
+      'name','duration', 'description', 'event_date','event_time','image_path','club_id',
   ];
 
   public function clubs()

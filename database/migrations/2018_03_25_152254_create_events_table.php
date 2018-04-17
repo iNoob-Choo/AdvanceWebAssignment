@@ -16,6 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('name');
             $table->integer('duration');
             $table->string('description');
             $table->string('image_path')->nullable();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
-
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -25,7 +25,7 @@ class EventController extends Controller
      */
     public function index()
     {
-      $events = Event::orderBy('name','asc')->paginate(10);
+      $events = Event::orderBy('id','asc')->paginate(10);
 
       return view('events.index', [
         'events' => $events,
@@ -56,12 +56,14 @@ class EventController extends Controller
     {
       $event = new Event();
       $event->fill($request -> all());
-      if(isset($request->club_logo_path))
+      $event_time = Carbon::createFromFormat('h:iA', $request->event_time);
+      $event->event_time = $event_time->format('H:i:s');
+      if(isset($request->image_path))
       {
         $file = $request->file('image_path');
-        $name = $request->name.'.jpg';
-        $path = $file->storeAs('public/eventimage',$name);
-        $event->image_path = $name;
+        $image_name = $request->name.'.jpg';
+        $path = $file->storeAs('public/eventimage',$image_name);
+        $event->image_path = $image_name;
       }
       $event ->save();
 
@@ -112,12 +114,14 @@ class EventController extends Controller
       if(!$event) throw new ModelNotFoundException;
 
       $event->fill($reuqest->all());
-      if(isset($request->club_logo_path))
+      $event_time = Carbon::createFromFormat('h:iA', $request->event_time);
+      $event->event_time = $event_time->format('H:i:s');
+      if(isset($request->image_path))
       {
         $file = $request->file('image_path');
-        $name = $request->name.'.jpg';
-        $path = $file->storeAs('public/eventimage',$name);
-        $event->image_path = $name;
+        $image_name = $request->name.'.jpg';
+        $path = $file->storeAs('public/eventimage',$image_name);
+        $event->image_path = $image_name;
       }
       $event->save();
       //$group->members()->sync($request->members_id);

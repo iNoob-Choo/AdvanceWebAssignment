@@ -8,7 +8,6 @@
           <!-- Table Headings -->
           <thead>
             <tr>
-              <th>No.</th>
               <th>Name</th>
               <th>Description</th>
               <th>Event Time</th>
@@ -21,20 +20,6 @@
           <!-- Table Body -->
           <tbody>
               <tr>
-                <td class="table-text">
-                  <div >{{ $i+1 }}</div>
-                </td>
-                <td class="table-text">
-                  <div>
-                    {!! link_to_route(
-                      'clubs.show',
-                      $title = $event->name,
-                      $parameters = [
-                        'id' => $event ->id,
-                      ]
-                      )!!}
-                  </div>
-                </td>
                 <td class="table-text">
                   <div>
                     {{ $event->name}}
@@ -57,13 +42,13 @@
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $club->created_at}}
+                    {{ $event->created_at}}
                   </div>
                 </td>
                 <td class="table-text">
                   <div>
                     @if(Storage::disk('public')->exists('eventimage/'.$event->name.'.jpg'))
-                    <img src="{{$event->image_path}}" alt="{{$event->name}}">
+                    <img width="120" src="{{"storage/eventimage/$event->image_path"}}" alt="{{$event->name}}">
                     @endif
                   </div>
                 </td>
