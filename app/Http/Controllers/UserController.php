@@ -67,10 +67,10 @@ class UserController extends Controller
           $user->role('member');
           break;
         case 2:
-          $user->role('club_admin');
+          $user->role('clubadmin');
           break;
         case 3:
-          $user->role('super_admin');
+          $user->role('superadmin');
           break;
       }
       $user ->save();
@@ -133,11 +133,11 @@ class UserController extends Controller
           $user->role_name ='Member';
           break;
         case 2:
-          $user->role('club_admin');
+          $user->role('clubadmin');
           $user->role_name ='Club Admin';
           break;
         case 3:
-          $user->role('super_admin');
+          $user->role('superadmin');
           $user->role_name = "Super Admin";
       }
       $user ->save();

@@ -15,8 +15,8 @@ class InitRolesAndPermissions extends Migration
      */
     public function up()
     {
-              //// Define roles
-       $admin = Bouncer::role()->create([
+      // Define roles
+       $super_admin = Bouncer::role()->create([
        'name' => 'superadmin',
        'title' => 'Super Admin',
        ]);
@@ -47,38 +47,42 @@ class InitRolesAndPermissions extends Migration
        'title' => 'Manage Member',
        ]);
 
-       $viewDivision = Bouncer::ability()->create([
-       'name' => 'view-division',
-
-       'title' => 'View Division',
+       $viewEvent = Bouncer::ability()->create([
+       'name' => 'view-event',
+       'title' => 'View Event',
        ]);
 
-       $createDivision = Bouncer::ability()->create([
-       'name' => 'create-division',
-       'title' => 'Create Division',
+       $createEvent = Bouncer::ability()->create([
+       'name' => 'create-event',
+       'title' => 'Create Event',
        ]);
 
-       $manageDivision = Bouncer::ability()->create([
-       'name' => 'manage-division',
-       'title' => 'Manage Division',
+       $manageEvent = Bouncer::ability()->create([
+       'name' => 'manage-event',
+       'title' => 'Manage Event',
        ]);
 
-       $viewGroup = Bouncer::ability()->create([
-       'name' => 'view-group',
-       'title' => 'View Group',
+       $viewClubMembers = Bouncer::ability()->create([
+       'name' => 'view-club-members',
+       'title' => 'View Club Members',
        ]);
 
-       $createGroup = Bouncer::ability()->create([
-       'name' => 'create-group',
-       'title' => 'Create Group',
-       ]);
+       //assign InitRolesAndPermission
+       Bouncer::allow($super_admin)->to($viewMember);
+       Bouncer::allow($super_admin)->to($createEvent);
+       Bouncer::allow($super_admin)->to($manageMember);
+       Bouncer::allow($super_admin)->to($viewEvent);
+       Bouncer::allow($super_admin)->to($createEvent);
+       Bouncer::allow($super_admin)->to($manageEvent);
+       Bouncer::allow($super_admin)->to($viewClubMembers);
 
-       $manageGroup = Bouncer::ability()->create([
-       'name' => 'manage-group',
-       'title' => 'Manage Group',
-       ]);
+       Bouncer::allow($club_admin)->to($viewEvent);
+       Bouncer::allow($club_admin)->to($createEvent);
+       Bouncer::allow($club_admin)->to($manageEvent);
+       Bouncer::allow($club_admin)->to($viewClubMembers);
 
-       
+       Bouncer::allow($member)->to($viewEvent);
+
 
        // Make the first user an admin
        $user = User::find(1);
