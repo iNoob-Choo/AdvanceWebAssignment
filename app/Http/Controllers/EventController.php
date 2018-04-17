@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEventsRequest;
 use App\Event;
 use Auth;
 use Carbon\Carbon;
@@ -53,7 +54,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEventsRequest $request)
     {
       $event = new Event();
       $event->fill($request -> all());
@@ -112,7 +113,7 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreEventsRequest $request, $id)
     {
       $event = Event::find($id);
       if(!$event) throw new ModelNotFoundException;

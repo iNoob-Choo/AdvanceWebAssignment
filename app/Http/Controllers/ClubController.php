@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClub;
 use App\Club;
 use App\User;
 use Auth;
@@ -57,7 +58,7 @@ class ClubController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClub $request)
     {
       $club = new Club();
       $club ->fill($request -> all());
@@ -118,7 +119,7 @@ class ClubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreClub $request, $id)
     {
       $club = Club::find($id);
       if(!$club) throw new ModelNotFoundException;
