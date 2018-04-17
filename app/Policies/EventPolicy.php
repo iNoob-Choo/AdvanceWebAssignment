@@ -16,6 +16,24 @@ class EventPolicy
      */
     public function __construct()
     {
-        //
+        return true;
     }
+
+    public function create(User $user)
+    {
+      return $user->can('create-event');
+    }
+
+    public function view(User $user)
+    {
+      return $user->can('view-event');
+    }
+
+    public function manage(User $user)
+    {
+      return $user-can('manage-event');
+    }
+
+
+
 }

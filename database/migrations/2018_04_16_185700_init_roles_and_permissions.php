@@ -67,6 +67,27 @@ class InitRolesAndPermissions extends Migration
        'title' => 'View Club Members',
        ]);
 
+       $viewClub = Bouncer::ability()->create([
+       'name' => 'view-club',
+       'title' => 'View Club',
+       ]);
+
+       $createClub = Bouncer::ability()->create([
+       'name' => 'create-club',
+       'title' => 'Create Club',
+       ]);
+
+       $editClub = Bouncer::ability()->create([
+       'name' => 'edit-club',
+       'title' => 'Edit Club',
+       ]);
+
+       $deleteClub = Bouncer::ability()->create([
+       'name' => 'delete-club',
+       'title' => 'Delete Club',
+       ]);
+
+
        //assign InitRolesAndPermission
        Bouncer::allow($super_admin)->to($viewMember);
        Bouncer::allow($super_admin)->to($createMember);
@@ -76,14 +97,20 @@ class InitRolesAndPermissions extends Migration
        Bouncer::allow($super_admin)->to($createEvent);
        Bouncer::allow($super_admin)->to($manageEvent);
        Bouncer::allow($super_admin)->to($viewClubMembers);
+       Bouncer::allow($super_admin)->to($editClub);
+       Bouncer::allow($super_admin)->to($deleteClub);
+       Bouncer::allow($super_admin)->to($viewClub);
+       Bouncer::allow($super_admin)->to($createClub);
 
        Bouncer::allow($club_admin)->to($viewEvent);
        Bouncer::allow($club_admin)->to($createEvent);
        Bouncer::allow($club_admin)->to($manageEvent);
        Bouncer::allow($club_admin)->to($viewClubMembers);
+       Bouncer::allow($club_admin)->to($editClub);
+       Bouncer::allow($club_admin)->to($viewClub);
 
        Bouncer::allow($member)->to($viewEvent);
-
+       Bouncer::allow($member3 )->to($viewClub);
 
        // Make the first user an admin
        $user = User::find(1);

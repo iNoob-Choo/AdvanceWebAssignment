@@ -52,6 +52,7 @@
                       $title = 'Edit',
                       $parameters = [
                         'id' => $user ->id,
+                      	'class' => 'btn btn-danger btn-block',
                       ]
                       )!!}
                   </div>

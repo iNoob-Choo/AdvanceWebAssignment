@@ -7,10 +7,18 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Main Page</div>
-
-                @can ('create',User::class)
-                  <a href="{{route('users.create')}}">Create Member</a>
-                @endcan
+                  <ul>
+                    <li>
+                      @can ('create',User::class)
+                        <a href="{{route('users.create')}}">Create Member</a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can ('view',User::class)
+                        <a href="{{route('users.index')}}">View All Member</a>
+                      @endcan
+                    </li>
+                  </ul>
 
 
             </div>
