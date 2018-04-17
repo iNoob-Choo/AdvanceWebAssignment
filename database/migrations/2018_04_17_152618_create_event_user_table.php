@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClubUserTable extends Migration
+class CreateEventUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateClubUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('club_user', function (Blueprint $table) {
-          $table->unsignedInteger('club_id');
+        Schema::create('event_user', function (Blueprint $table) {
+          $table->unsignedInteger('event_id');
           $table->unsignedInteger('user_id');
-          $table->foreign('club_id')->references('id')->on('clubs');
+          $table->foreign('event_id')->references('id')->on('events');
           $table->foreign('user_id')->references('id')->on('users');
         });
     }

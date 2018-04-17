@@ -1,4 +1,4 @@
-
+<?php use App\Event as Events; ?>
 @extends('layouts.app')
 @section('content')
 
@@ -12,7 +12,9 @@
               <th>No.</th>
               <th>Name</th>
               <th>Created</th>
+              @can('edit',Events::class)
               <th>Actions</th>
+              @endcan
             </tr>
           </thead>
 
@@ -40,6 +42,7 @@
                   </div>
                 </td>
                 <td class="table-text">
+                  @can('edit',Events::class)
                   <div>
                     {!! link_to_route(
                       'events.edit',
@@ -50,6 +53,7 @@
                       $attributes = ['class' => 'btn btn-primary btn-block',]
                       )!!}
                   </div>
+                  @endcan
                 </td>
               </tr>
             @endforeach

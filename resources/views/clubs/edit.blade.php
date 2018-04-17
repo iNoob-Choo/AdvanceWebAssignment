@@ -1,3 +1,6 @@
+<?php
+use App\User;
+ ?>
 @extends('layouts.app')
 @section('content')
   @if ($errors->any())
@@ -44,7 +47,23 @@
            !!}
          </div>
        </div>
-
+       @if(Auth::user()->isA('superadmin'))
+       <!-- CHAIRPERSON -->
+      <div class="form-group row">
+        {!! Form::label('chairperson_id', 'Chairperson', [
+          'class' => 'control-label col-sm-3',
+        ]) !!}
+        <div class="col-sm-9">
+          {!! Form::select('chairperson_id',
+          User::where('role_name','!=',3)->pluck('name','id'),
+          null, [
+            'id' => 'select2-form',
+            'class' => 'form-control',
+            'placeholder' => '- Select Student -',
+          ]) !!}
+        </div>
+      </div>
+      @endif
        <!-- CLUB LOGO-->
        <div class="form-group row">
          {!!  Form::label('club-logo','Logo',[

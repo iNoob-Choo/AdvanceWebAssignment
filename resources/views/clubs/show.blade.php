@@ -42,14 +42,15 @@
           </tbody>
         </table>
       </div>
-      @can('view-members',App\Club::class)
+      @can ('viewMembers',App\Club::class)
         <div>
           {!! link_to_route(
-            'clubs.showmembers',
-            $title = 'Show Members',
+            'clubs.members',
+            $title = 'View Members',
             $parameters = [
               'id' => $club ->id,
-            ]
+            ],
+            $attributes = ['class' => 'btn btn-primary btn-block',]
             )!!}
         </div>
       @endcan

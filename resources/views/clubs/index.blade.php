@@ -1,4 +1,8 @@
+<?php
 
+use App\Club;
+use App\Event as Events;
+ ?>
 @extends('layouts.app')
 @section('content')
 
@@ -36,48 +40,76 @@
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $club->name}}
+                      {{ $club->created_at}}
                   </div>
                 </td>
                 <td class="table-text">
+                  @can ('edit',Club::class)
+                    <div>
+                      {!! link_to_route(
+                        'clubs.edit',
+                        $title = 'Edit',
+                        $parameters = [
+                          'id' => $club ->id,
+                        ],
+                        $attributes = ['class' => 'btn btn-primary btn-block',]
+                        )!!}
+                    </div>
+                  @endcan
+                  @can ('viewMembers',Club::class)
+                    <div>
+                      {!! link_to_route(
+                        'clubs.members',
+                        $title = 'View Club Members',
+                        $parameters = [
+                          'id' => $club ->id,
+                        ],
+                        $attributes = ['class' => 'btn btn-primary btn-block',]
+                        )!!}
+                    </div>
+                  @endcan
                   <div>
-                    {{ $club->created_at}}
-                  </div>
+                      {!! Form::open([
+                        'route' => ['join.club', $club->id],
+                        'method' => 'POST',
+                        'class' => 'form-horizontal'
+                      ]) !!}
+
+                      {!! Form::button('Join Club', [
+                        'type' => 'submit',
+                        'class' => 'btn btn-primary btn-block',
+                      ]) !!}
+
+                      {!! Form::close() !!}
+                    </div>
+                    @can ('view',Events::class)
+                      <div>
+                          {!! link_to_route(
+                            'clubs.events',
+                            $title = 'View Events',
+                            $parameters = [
+                              'id' => $club ->id,
+                            ],
+                            $attributes = ['class' => 'btn btn-primary btn-block',]
+                            )!!}
+                        </div>
+                      </div>
+                    @endcan
+                  @if (Auth::user()->isA('superadmin'))
+                    {!! Form::open([
+                      'route' => ['clubs.destroy', $club->id],
+                      'method' => 'destroy',
+                      'class' => 'form-horizontal'
+                    ]) !!}
+
+                    {!! Form::button('Delete Club', [
+                      'type' => 'submit',
+                      'class' => 'btn btn-danger btn-block',
+                    ]) !!}
+
+                    {!! Form::close() !!}
+                  @endif
                 </td>
-                <td class="table-text">
-                  <div>
-                    {!! link_to_route(
-                      'clubs.edit',
-                      $title = 'Edit',
-                      $parameters = [
-                        'id' => $club ->id,
-                      ],
-                      $attributes = ['class' => 'btn btn-primary btn-block',]
-                      )!!}
-                  </div>
-                </td>
-                {{-- <td class="table-text">
-                  <div>
-                    {!! link_to_route(
-                      'member.joingroup',
-                      $title = 'Join Group',
-                      $parameters = [
-                        'id' => $member ->id,
-                      ]
-                      )!!}
-                  </div>
-                </td>
-                <td class="table-text">
-                  <div>
-                    {!! link_to_route(
-                      'member.showgroups',
-                      $title = 'Show Groups',
-                      $parameters = [
-                        'id' => $member ->id,
-                      ]
-                      )!!}
-                  </div>
-                </td> --}}
               </tr>
             @endforeach
           </tbody>

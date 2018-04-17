@@ -29,9 +29,9 @@ class EventPolicy
       return $user->can('view-event');
     }
 
-    public function manage(User $user)
+    public function edit(User $user)
     {
-      return $user-can('manage-event');
+      return $user->can('manage-event');
     }
 
 

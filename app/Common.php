@@ -11,6 +11,7 @@ class Common
       1 => 'Member',
       2 => 'Club Admin',
       3 => 'Super Admin',
+      4 => 'Non-Member'
   ];
 
 

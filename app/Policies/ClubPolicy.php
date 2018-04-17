@@ -38,4 +38,14 @@ class ClubPolicy
     {
       return $user->can('delete-club');
     }
+
+    public function viewMembers(User $user)
+    {
+      return $user->can('view-club-members');
+    }
+
+    public function viewEvent(User $user)
+    {
+      return $user->can('view-event');
+    }
 }

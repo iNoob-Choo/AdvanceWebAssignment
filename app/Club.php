@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Event as Events;
 
 class Club extends Model
 {
@@ -26,7 +27,7 @@ class Club extends Model
 
   public function events()
   {
-    return $this->hasMany('App\Event');
+    return $this->hasMany(Events::class);
   }
 
 

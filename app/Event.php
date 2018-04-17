@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Club;
+use App\User;
 
 class Event extends Model
 {
@@ -20,7 +22,12 @@ class Event extends Model
 
   public function clubs()
   {
-    return $this->belongsTo('App\Club');
+    return $this->belongsTo(Club::class);
+  }
+
+  public function users()
+  {
+    return $this->belongsToMany(User::class);
   }
 
 

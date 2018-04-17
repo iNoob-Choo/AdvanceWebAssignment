@@ -1,25 +1,27 @@
 
+<?php use App\Event as Events;?>
 @extends('layouts.app')
 @section('content')
 
     <!-- Boostrap Boilerplate -->
     <div class="pabel-body">
-      @if(count($users)>0)
+      @if(count($club)>0)
         <table class="table table-striped task-table">
           <!-- Table Headings -->
           <thead>
             <tr>
               <th>No.</th>
               <th>Name</th>
-              <th>Username</th>
               <th>Created</th>
+              @can('edit',Events::class)
               <th>Actions</th>
+              @endcan
             </tr>
           </thead>
 
           <!-- Table Body -->
           <tbody>
-            @foreach ($users as $i => $user)
+            @foreach ($club->events as $i => $event)
               <tr>
                 <td class="table-text">
                   <div >{{ $i+1 }}</div>
@@ -27,64 +29,39 @@
                 <td class="table-text">
                   <div>
                     {!! link_to_route(
-                      'users.show',
-                      $title = $user->name,
+                      'events.show',
+                      $title = $event->name,
                       $parameters = [
-                        'id' => $user ->id,
+                        'id' => $event ->id,
                       ]
                       )!!}
                   </div>
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $user->username}}
+                    {{ $event->created_at}}
                   </div>
                 </td>
-                <td class="table-text">
-                  <div>
-                    {{ $user->created_at}}
-                  </div>
-                </td>
-                <td class="table-text">
+
+                  @can('edit',Events::class)
+                  <td class="table-text">
                   <div>
                     {!! link_to_route(
-                      'users.edit',
+                      'events.edit',
                       $title = 'Edit',
                       $parameters = [
-                        'id' => $user ->id,
+                        'id' => $event ->id,
                       ],
                       $attributes = ['class' => 'btn btn-primary btn-block',]
                       )!!}
                   </div>
-                  <div>
-									{!! Form::open([
-										'route' => ['users.destroy', $user->id],
-										'method' => 'DELETE',
-										'class' => 'form-horizontal'
-									]) !!}
+                  </td>
+                  @endcan
 
-									{!! Form::button('Delete', [
-										'type' => 'submit',
-										'class' => 'btn btn-danger btn-block',
-									]) !!}
-
-									{!! Form::close() !!}
-								</div>
-                </td>
               </tr>
             @endforeach
           </tbody>
         </table>
-        <div align="center">{!!$users->links()!!}</div>
-        <div align="left">
-          {!! link_to_route(
-            'users.create',
-            $title = 'Create',
-            $parameters = [  ],
-            $attributes = ['class' => 'btn btn-primary ',]
-            )!!}
-        </div>
-         <a class="btn btn-info" href="{{ URL::previous() }}">Back</a>
       @else
         <div>
           No Records Found

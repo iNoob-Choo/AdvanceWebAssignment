@@ -32,3 +32,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/events','EventController');
 Route::resource('/clubs','ClubController');
 Route::resource('/users','UserController');
+
+
+Route::post('/events/joinevent/{id}','EventController@joinEvent')->name('join.event');
+Route::get('/events/viewparticipant/{id}','EventController@viewParticipant')->name('view.participant');
+Route::post('/clubs/joinclub/{id}','ClubController@joinClub')->name('join.club');
+Route::get('/clubs/clubevent/{id}','ClubController@viewClubEvents')->name('clubs.events');
+Route::get('/clubs/clubmembers/{id}','ClubController@viewClubMembers')->name('clubs.members');

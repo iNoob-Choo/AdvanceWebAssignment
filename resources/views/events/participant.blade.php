@@ -11,12 +11,12 @@
  <thead>
  <tr>
  <th>No.</th>
- <th>Members</th>
+ <th>Particiapnt</th>
  </tr>
  </thead>
  <!-- Table Body -->
  <tbody>
-    @foreach ($club->users as $i => $member)
+    @foreach ($event->users as $i => $member)
     <tr>
       <td class="table-text">
         <div >{{ $i+1 }}</div>
@@ -28,7 +28,7 @@
     @endforeach
  </tbody>
  </table>
-  <a class="btn btn-info" href="{{ URL::previous() }}">Back</a>
+ <a class="btn btn-info" href="{{ URL::previous() }}">Back</a>
  </div>
 
  @endsection

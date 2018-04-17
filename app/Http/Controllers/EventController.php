@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use Auth;
 use Carbon\Carbon;
 
 class EventController extends Controller
@@ -25,8 +26,7 @@ class EventController extends Controller
      */
     public function index()
     {
-      $events = Event::orderBy('id','asc')->paginate(10);
-
+      $events = Event::with('clubs')->orderBy('id','asc')->paginate(10);
       return view('events.index', [
         'events' => $events,
       ]);
@@ -39,6 +39,7 @@ class EventController extends Controller
      */
     public function create()
     {
+      $this->authorize('create',Event::class);
       $event = new Event();
 
       return view ('events.create',[
@@ -58,6 +59,7 @@ class EventController extends Controller
       $event->fill($request -> all());
       $event_time = Carbon::createFromFormat('h:iA', $request->event_time);
       $event->event_time = $event_time->format('H:i:s');
+      $event->club_id = $request->club_id;
       if(isset($request->image_path))
       {
         $file = $request->file('image_path');
@@ -78,6 +80,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
+      $this->authorize('view',Event::class);
       $event = Event::find($id);
       if(!$event) throw new ModelNotFoundException;
       return view('events.show',[
@@ -93,6 +96,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+      $this->authorize('edit',Event::class);
       $event = Event::find($id);
       if(!$event) throw new ModelNotFoundException;
 
@@ -141,5 +145,23 @@ class EventController extends Controller
       $event->delete();
       return redirect()->route('events.index');
 
+    }
+
+    public function joinEvent($event_id)
+    {
+      $event = Event::find($event_id);
+      if(!$event) throw new ModelNotFoundException;
+      $event->users()->sync(Auth::user()->id,false);
+      return redirect()->route('events.show',['id' => $event_id]);
+    }
+
+    public function viewParticipant($event_id)
+    {
+      $event = Event::with('users')->where('id',$event_id)->first();
+      if(!$event) throw new ModelNotFoundException;
+
+      return view('events.participant',[
+          'event' => $event,
+      ]);
     }
 }

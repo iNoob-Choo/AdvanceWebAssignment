@@ -64,18 +64,26 @@ class UserController extends Controller
         1 => 'Member',
         2 => 'Club Admin',
         3 => 'Super Admin',
+        4 => 'Non Member'
       */
       switch($request->role_name)
       {
         case 1:
           $user->assign('member');
+          $user->role_name ='member';
           break;
         case 2:
           $user->assign('clubadmin');
+          $user->role_name ='clubadmin';
           break;
         case 3:
           $user->assign('superadmin');
+          $user->role_name = "superadmin";
           break;
+        case 4:
+            $user->assign('nonmember');
+            $user->role_name = "nonmember";
+            break;
       }
 
 
@@ -90,7 +98,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+
       $user = User::find($id);
+      $this->authorize('view',$user);
       if(!$user) throw new ModelNotFoundException;
       return view('users.show',[
         'user' => $user,
@@ -106,6 +116,7 @@ class UserController extends Controller
     public function edit($id)
     {
       $user = User::find($id);
+      $this->authorize('edit',User::class);
       if(!$user) throw new ModelNotFoundException;
 
       return view('users.edit',[
@@ -133,16 +144,21 @@ class UserController extends Controller
       switch($request->role_name)
       {
         case 1:
-          $user->role('member');
-          $user->role_name ='Member';
+          $user->assign('member');
+          $user->role_name ='member';
           break;
         case 2:
-          $user->role('clubadmin');
-          $user->role_name ='Club Admin';
+          $user->assign('clubadmin');
+          $user->role_name ='clubadmin';
           break;
         case 3:
-          $user->role('superadmin');
-          $user->role_name = "Super Admin";
+          $user->assign('superadmin');
+          $user->role_name = "superadmin";
+          break;
+        case 4:
+            $user->assign('nonmember');
+            $user->role_name = "nonmember";
+            break;
       }
       $user ->save();
 
@@ -159,6 +175,7 @@ class UserController extends Controller
     {
       $user = User::find($id);
       if(!$user) throw new ModelNotFoundException;
+      $user->retract($user->role_name);
       $user->delete();
       return redirect()->route('users.index');
     }

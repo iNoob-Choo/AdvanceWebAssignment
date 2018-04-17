@@ -56,5 +56,31 @@
           </tbody>
         </table>
       </div>
+      <div>
+          {!! Form::open([
+            'route' => ['join.event', $event->id],
+            'method' => 'POST',
+            'class' => 'form-horizontal'
+          ]) !!}
+
+          {!! Form::button('Join Event', [
+            'type' => 'submit',
+            'id' => 'join-button',
+            'class' => 'btn btn-primary',
+          ]) !!}
+
+          {!! Form::close() !!}
+        </div>
+        <div>
+          {!! link_to_route(
+            'view.participant',
+            $title = 'View Participant',
+            $parameters = [
+              'id' => $event ->id,
+            ],
+            $attributes = ['class' => 'btn btn-info',]
+            )!!}
+        </div>
     </div>
+     <a class="btn btn-info" href="{{ URL::previous() }}">Back</a>
 @endsection

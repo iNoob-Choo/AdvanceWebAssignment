@@ -31,6 +31,11 @@ class InitRolesAndPermissions extends Migration
        'title' => 'Club Admin',
        ]);
 
+       $non_member = Bouncer::role()->create([
+       'name' => 'nonmember',
+       'title' => 'Non Member',
+       ]);
+
        // Define abilities
        $viewMember = Bouncer::ability()->create([
        'name' => 'view-member',
@@ -111,6 +116,8 @@ class InitRolesAndPermissions extends Migration
 
        Bouncer::allow($member)->to($viewEvent);
        Bouncer::allow($member)->to($viewClub);
+
+       Bouncer::allow($non_member)->to($viewClub);
 
        // Make the first user an admin
        $user = User::find(1);
