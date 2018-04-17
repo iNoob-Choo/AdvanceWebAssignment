@@ -13,7 +13,7 @@
    <div class="panel-body">
      <!-- New Division Form -->
      {!! Form::model($club,[
-       'route'=>['clubs.update'],
+       'route'=>['clubs.update',$club->id],
        'class'=>'form-horizontal',
        'enctype'=>'multipart/form-date',
        ])!!}

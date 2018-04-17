@@ -8,9 +8,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Main Page</div>
 
-                @can ('create-member',User::class)
+                @can ('create',User::class)
                   <a href="{{route('users.create')}}">Create Member</a>
                 @endcan
+
 
             </div>
         </div>

@@ -69,6 +69,7 @@ class InitRolesAndPermissions extends Migration
 
        //assign InitRolesAndPermission
        Bouncer::allow($super_admin)->to($viewMember);
+       Bouncer::allow($super_admin)->to($createMember);
        Bouncer::allow($super_admin)->to($createEvent);
        Bouncer::allow($super_admin)->to($manageMember);
        Bouncer::allow($super_admin)->to($viewEvent);

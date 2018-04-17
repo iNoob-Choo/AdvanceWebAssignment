@@ -1,6 +1,6 @@
 <?php
 use App\User;
-
+use App\Common;
  ?>
 @extends('layouts.app')
 @section('content')
@@ -17,8 +17,9 @@ use App\User;
 <div class="panel-body">
   <!-- New Guard Form -->
   {!! Form::model($user, [
-    'route' => ['users.update'],
-    'class' => 'form-horizontal'
+    'route' => ['users.update',$user->id],
+    'class' => 'form-horizontal',
+
   ]) !!}
 
   <!-- NAME -->

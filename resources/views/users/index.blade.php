@@ -4,7 +4,7 @@
 
     <!-- Boostrap Boilerplate -->
     <div class="pabel-body">
-      @if(count($clubs)>0)
+      @if(count($users)>0)
         <table class="table table-striped task-table">
           <!-- Table Headings -->
           <thead>
@@ -37,17 +37,12 @@
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $user->name}}
-                  </div>
-                </td>
-                <td class="table-text">
-                  <div>
                     {{ $user->username}}
                   </div>
                 </td>
                 <td class="table-text">
                   <div>
-                    {{ $club->created_at}}
+                    {{ $user->created_at}}
                   </div>
                 </td>
                 <td class="table-text">

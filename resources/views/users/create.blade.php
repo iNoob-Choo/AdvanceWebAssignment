@@ -1,6 +1,6 @@
 <?php
 use App\User;
-
+use App\Common;
  ?>
 @extends('layouts.app')
 @section('content')
@@ -15,7 +15,7 @@ use App\User;
   @endif
   <!-- Bootstrap Boilerplate... -->
 <div class="panel-body">
-  <!-- New Guard Form -->
+  <!-- New User Form -->
   {!! Form::model($user, [
     'route' => ['users.store'],
     'class' => 'form-horizontal'
@@ -40,7 +40,7 @@ use App\User;
       ]) !!}
       <div class="col-sm-9">
         {!! Form::text('username', null, [
-          'id' => 'guard-username',
+          'id' => 'user-username',
           'class' => 'form-control',
         ]) !!}
       </div>
@@ -75,7 +75,7 @@ use App\User;
       ]) !!}
       <div class="col-sm-9">
         {!! Form::email('email', null, [
-          'id' => 'guard-email',
+          'id' => 'user-email',
           'class' => 'form-control',
         ]) !!}
       </div>

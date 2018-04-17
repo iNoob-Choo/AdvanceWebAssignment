@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -38,6 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
+
+      $this->authorize('create',User::class);
       $user = new User();
 
       return view ('users.create',[
@@ -55,7 +58,8 @@ class UserController extends Controller
     {
       $user = new User();
       $user->fill($request -> all());
-      $user->password = bycrpt($request->password);
+      $user->password = Hash::make($request->password);
+      $user ->save();
       /*
         1 => 'Member',
         2 => 'Club Admin',
@@ -64,16 +68,16 @@ class UserController extends Controller
       switch($request->role_name)
       {
         case 1:
-          $user->role('member');
+          $user->assign('member');
           break;
         case 2:
-          $user->role('clubadmin');
+          $user->assign('clubadmin');
           break;
         case 3:
-          $user->role('superadmin');
+          $user->assign('superadmin');
           break;
       }
-      $user ->save();
+
 
       return redirect() -> route('users.index');
     }
