@@ -51,7 +51,8 @@
                       $title = 'Edit',
                       $parameters = [
                         'id' => $event ->id,
-                      ]
+                      ],
+                      $attributes = ['class' => 'btn btn-primary btn-block',]
                       )!!}
                   </div>
                 </td>

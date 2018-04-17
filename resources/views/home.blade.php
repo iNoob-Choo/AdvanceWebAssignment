@@ -1,4 +1,8 @@
-<?php use App\User; ?>
+<?php
+ use App\User;
+ use App\Club;
+ use App\Event as Events;
+  ?>
 @extends('layouts.app')
 
 @section('content')
@@ -16,6 +20,26 @@
                     <li>
                       @can ('view',User::class)
                         <a href="{{route('users.index')}}">View All Member</a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can ('view',Club::class)
+                        <a href="{{route('clubs.index')}}">View Club</a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can ('create',Club::class)
+                        <a href="{{route('clubs.create')}}">Create Club</a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can ('view',Events::class)
+                        <a href="{{route('events.index')}}">View Events</a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can ('create',Events::class)
+                        <a href="{{route('events.create')}}">Create Events</a>
                       @endcan
                     </li>
                   </ul>

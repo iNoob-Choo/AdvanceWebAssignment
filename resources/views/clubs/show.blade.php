@@ -34,7 +34,7 @@
                 <td class="table-text">
                   <div>
                     @if(Storage::disk('public')->exists('clublogo/'.$club->name.'.jpg'))
-                    <img src="{{$club->club_logo_path}}" alt="{{$club->name}}">
+                    <img  width="120" src="{{"storage/clublogo/$club->club_logo_path"}}" alt="{{$club->name}}">
                     @endif
                   </div>
                 </td>

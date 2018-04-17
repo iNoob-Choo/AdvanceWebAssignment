@@ -52,8 +52,8 @@
                       $title = 'Edit',
                       $parameters = [
                         'id' => $user ->id,
-                      	'class' => 'btn btn-danger btn-block',
-                      ]
+                      ],
+                      $attributes = ['class' => 'btn btn-primary btn-block',]
                       )!!}
                   </div>
                   <div>
@@ -76,6 +76,14 @@
           </tbody>
         </table>
         <div align="center">{!!$users->links()!!}</div>
+        <div align="left">
+          {!! link_to_route(
+            'users.create',
+            $title = 'Create',
+            $parameters = [  ],
+            $attributes = ['class' => 'btn btn-primary ',]
+            )!!}
+        </div>
       @else
         <div>
           No Records Found

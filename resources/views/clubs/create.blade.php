@@ -22,7 +22,7 @@ use App\User;
      {!! Form::model($club,[
        'route'=>['clubs.store'],
        'class'=>'form-horizontal',
-       'enctype'=>'multipart/form-date',
+       'enctype'=>'multipart/form-data',
        ])!!}
 
        <!-- NAME -->
@@ -57,7 +57,7 @@ use App\User;
         ]) !!}
         <div class="col-sm-9">
           {!! Form::select('chairperson_id',
-          User::where('role','!=','Super Admin')->pluck('name','id'),
+          User::where('role_name','!=',3)->pluck('name','id'),
           null, [
             'id' => 'select2-form',
             'class' => 'form-control',
@@ -78,7 +78,6 @@ use App\User;
            !!}
          </div>
        </div>
-
 
        <!-- Submit Button -->
        <div class="form-group row">

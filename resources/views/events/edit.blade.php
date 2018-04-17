@@ -15,7 +15,7 @@
      {!! Form::model($event,[
        'route'=>['events.update'],
        'class'=>'form-horizontal',
-       'enctype'=>'multipart/form-date',
+       'enctype'=>'multipart/form-data',
        ])!!}
 
        <!-- NAME -->

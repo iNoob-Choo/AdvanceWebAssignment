@@ -18,7 +18,7 @@ class ClubController extends Controller
     {
       $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -58,11 +58,13 @@ class ClubController extends Controller
     {
       $club = new Club();
       $club ->fill($request -> all());
+      $club->chairperson_id = $request->chairperson_id;
       if(isset($request->club_logo_path))
       {
         $file = $request->file('club_logo_path');
-        $path = $file->storeAs('public/clublogo',$request->name.'.jpg');
-        $club->club_logo_path = $path;
+        $name = $request->name.'.jpg';
+        $path = $file->storeAs('public/clublogo',$name);
+        $club->club_logo_path = $name;
       }
       $club ->save();
 
@@ -112,12 +114,13 @@ class ClubController extends Controller
       $club = Club::find($id);
       if(!$club) throw new ModelNotFoundException;
 
-      $club->fill($reuqest->all());
+      $club->fill($request->all());
       if(isset($request->club_logo_path))
       {
         $file = $request->file('club_logo_path');
-        $path = $file->storeAs('public/clublogo',$request->name.'.jpg');
-        $club->club_logo_path = $path;
+        $name = $request->name.'.jpg';
+        $path = $file->storeAs('public/clublogo',$name);
+        $club->club_logo_path = $name;
       }
       $club->save();
       //$group->members()->sync($request->members_id);

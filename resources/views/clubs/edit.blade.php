@@ -14,8 +14,9 @@
      <!-- New Division Form -->
      {!! Form::model($club,[
        'route'=>['clubs.update',$club->id],
+       'method'=>'PUT',
        'class'=>'form-horizontal',
-       'enctype'=>'multipart/form-date',
+       'enctype'=>'multipart/form-data',
        ])!!}
 
        <!-- NAME -->

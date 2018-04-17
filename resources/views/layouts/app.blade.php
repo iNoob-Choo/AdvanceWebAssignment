@@ -4,21 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <base href="http://clubmanagement/">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <!-- Scripts -->
+    {!! Html::script('js/jquery.min.js'); !!}
+    {!! Html::script('js/bootstrap.min.js'); !!}
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {!! Html::style('css/bootstrap.min.css'); !!}
+    <!-- Scripts -->
+    {{Html::style('css\jquery.timepicker.css')}}
+    {{Html::script('js\jquery.timepicker.min.js')}}
+    {{Html::style('css\bootstrap-datepicker3.standalone.min.css')}}
+    {{Html::script('js\bootstrap-datepicker.min.js')}}
     @yield('stylessheets')
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Scripts -->
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}
-    @yield('scripts')
+
+
 </head>
 <body>
     <div id="app">
@@ -35,7 +40,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -79,7 +84,7 @@
 
 
         @yield('content')
-
+        @yield('scripts')
     </div>
 
 </body>

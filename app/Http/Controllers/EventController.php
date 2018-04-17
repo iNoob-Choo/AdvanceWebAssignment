@@ -17,7 +17,7 @@ class EventController extends Controller
     {
       $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -56,11 +56,12 @@ class EventController extends Controller
     {
       $event = new Event();
       $event->fill($request -> all());
-      if(isset($request->image_path))
+      if(isset($request->club_logo_path))
       {
         $file = $request->file('image_path');
-        $path = $file->storeAs('public/eventimage',$request->name.'.jpg');
-        $event->image_path = $path;
+        $name = $request->name.'.jpg';
+        $path = $file->storeAs('public/eventimage',$name);
+        $event->image_path = $name;
       }
       $event ->save();
 
@@ -111,11 +112,12 @@ class EventController extends Controller
       if(!$event) throw new ModelNotFoundException;
 
       $event->fill($reuqest->all());
-      if(isset($request->image_path))
+      if(isset($request->club_logo_path))
       {
         $file = $request->file('image_path');
-        $path = $file->storeAs('public/eventimage',$request->name.'.jpg');
-        $event->image_path = $path;
+        $name = $request->name.'.jpg';
+        $path = $file->storeAs('public/eventimage',$name);
+        $event->image_path = $name;
       }
       $event->save();
       //$group->members()->sync($request->members_id);
