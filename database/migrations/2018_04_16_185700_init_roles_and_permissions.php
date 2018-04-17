@@ -110,7 +110,7 @@ class InitRolesAndPermissions extends Migration
        Bouncer::allow($club_admin)->to($viewClub);
 
        Bouncer::allow($member)->to($viewEvent);
-       Bouncer::allow($member3 )->to($viewClub);
+       Bouncer::allow($member)->to($viewClub);
 
        // Make the first user an admin
        $user = User::find(1);
