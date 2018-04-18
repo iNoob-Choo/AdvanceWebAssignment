@@ -26,8 +26,8 @@ class StoreEventsRequest extends FormRequest
         return [
           'name' => 'required | max:100',
           'description' => 'required | max:255',
-          'duration' => 'numeric | max:2 ',
-          'image_path' =>'image | mimes:jpeg | max:2000',
+          'duration' => 'numeric | max:5 ',
+          'image_path' =>'image |  max:2000',
           'club_id' => 'required',
           'event_date' => 'required',
           'event_time' => 'required',

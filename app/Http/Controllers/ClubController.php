@@ -64,7 +64,7 @@ class ClubController extends Controller
       $club ->fill($request -> all());
       $club->chairperson_id = $request->chairperson_id;
       $user = User::find($request->chairperson_id);
-      $club->users()->sync($user->id,false);
+
       $user->retract($user->role_name);
       $user->assign('clubadmin');
       if(isset($request->club_logo_path))
@@ -75,6 +75,7 @@ class ClubController extends Controller
         $club->club_logo_path = $name;
       }
       $club ->save();
+      $club->users()->sync($user->id,false);
 
       return redirect() -> route('clubs.index');
     }

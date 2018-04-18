@@ -26,8 +26,7 @@ class StoreClub extends FormRequest
         return [
             'name' => 'required | max:100',
             'description' => 'required | max:255',
-            'club_logo_path' =>'image | mimes:jpeg | max:2000',
-            'user_id' => 'required',
+            'club_logo_path' =>'image | max:2000',
         ];
     }
 }

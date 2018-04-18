@@ -19,6 +19,7 @@ use App\Common;
   {!! Form::model($user, [
     'route' => ['users.update',$user->id],
     'class' => 'form-horizontal',
+    'method' =>'PUT',
 
   ]) !!}
 
